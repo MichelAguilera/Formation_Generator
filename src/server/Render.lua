@@ -2,7 +2,7 @@
 -- DEPENDENCIES
 local sm = require(game:GetService("ReplicatedStorage").Common:WaitForChild("sm"))
 local config = require(sm.RS.Common:WaitForChild("config")).Render
-local data = require(script.Parent.DummyData)
+local data = require(script.Parent.FormationData)
 
 -- CLASS
 local Render = {} 			-- Render Class
@@ -22,7 +22,7 @@ function Render:render_platoon(num, max_columns --[[Number of persons in formati
 	if not max_columns then max_columns = 5; warn("max_columns not defined") end
 
 	-- GET DATA
-	data = require(script.Parent.DummyData) -- Reload data
+	data = require(script.Parent.FormationData) -- Reload data
 	-- print(num, data)
 	
 	-- CREATE CLASS (Required to work)

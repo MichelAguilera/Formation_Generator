@@ -7,8 +7,8 @@ config = {}
 -- congig.Render
 config.Render = {
     ["DataSize"] = 500;
-    ["RenderAmount"] = 500; -- Keep equal or less than "DataSize"
-    ["MaxColumns"] = 50;
+    ["RenderAmount"] = 30; -- Keep equal or less than "DataSize"
+    ["MaxColumns"] = 10;
 }
 
 function config.Render.getRenderFromPos()
