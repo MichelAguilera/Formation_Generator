@@ -18,6 +18,10 @@ rojo serve
 
 For more help, check out [the Rojo documentation](https://rojo.space/docs).
 
+## Required Additional Steps
+
+Move GameObjects/template.rbxm to game.ReplicatedStorage in Roblox Studio
+
 ## What is this?
 
 This is a character generator that can be used to easily create large formation matricies (rows and columns) of customizable humanoids. This can be done by editing the configuration file.
