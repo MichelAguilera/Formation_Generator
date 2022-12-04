@@ -8,4 +8,4 @@ local Render = require(script.Parent.Render)
 
 -- MAIN
 wait(1)
-local test1 = Render:render_platoon(config.RenderAmount)
+local test1 = Render:render_platoon(config.RenderAmount, config.MaxColumns)

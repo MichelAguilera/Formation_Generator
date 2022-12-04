@@ -16,27 +16,39 @@ end
 setmetatable(Render, {__call = Render.new})
 
 -- CLASS FUNCTIONS
-function Render:render_platoon(num --[[Number of persons in formation]])
-	
+function Render:render_platoon(num, max_columns --[[Number of persons in formation]])
+	-- DEFAULT PARAMETERS
+	if not num then num = 10; warn("num not defined") end
+	if not max_columns then max_columns = 5; warn("max_columns not defined") end
+
 	-- GET DATA
-	data = require(script.Parent.DummyData)
+	data = require(script.Parent.DummyData) -- Reload data
 	-- print(num, data)
 	
 	-- CREATE CLASS (Required to work)
 	local obj = Render.new()
-	local pos = config.RenderFromPos
+	local pos = config.getRenderFromPos()
 	
-	-- Iterator: Render every person in formation
-	local iter = 0
+	local obj_id = 0
+	local iter_columns = 0
 	repeat
-		pos["x"] = pos["x"] + 5 	-- Spacing between spawns
-		obj:define(data[iter], pos) -- Gets data from the data module and embeds it into the new RenderInstance object
-		obj:render() 				-- Spawns the RenderInstance using data previously defined above
-		iter = iter + 1
-	until iter == num
-	
+		-- Iterator: Render every person in formation
+		local iter_rows = 0
+		repeat
+			obj:define(data[obj_id], pos) 	-- Gets data from the data module and embeds it into the new RenderInstance object
+			obj:render() 					-- Spawns the RenderInstance using data previously defined above
+			iter_rows = iter_rows + 1
+			obj_id = obj_id + 1
+			pos.x = pos.x + 5 		-- Spacing between spawns
+		until iter_rows >= max_columns or obj_id >= num
+		iter_columns = iter_columns + 1
+		pos.x = config.getRenderFromPos().x
+		pos.z = pos.z + 5
+		print(pos, config.getRenderFromPos())
+	until obj_id >= num or iter_columns >= 300
+
 	-- Resets pos["x"] value
-	pos["x"] = 0
+	pos.x = config.getRenderFromPos().x
 end
 
 -- OBJECT FUNCTIONS
@@ -52,7 +64,7 @@ function RenderInstance:define(args, pos) -- args = data, pos = the spawn positi
 end
 
 function RenderInstance:render()
-	print("Rendering Clone", self.Pos)
+	-- print("Rendering Clone", self.Pos)
 	local subj = sm.RS.Template.humanoid_template:Clone()
 	subj.PrimaryPart.Position = Vector3.new(self.Pos["x"], self.Pos["y"], self.Pos["z"])
 	subj.Parent = game.Workspace

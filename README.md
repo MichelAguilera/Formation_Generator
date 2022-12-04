@@ -20,4 +20,4 @@ For more help, check out [the Rojo documentation](https://rojo.space/docs).
 
 ## What is this?
 
-This is a character generator that can be used to easily create large formations of customizable humanoids. This can be done by editing the configuration file.
+This is a character generator that can be used to easily create large formation matricies (rows and columns) of customizable humanoids. This can be done by editing the configuration file.
